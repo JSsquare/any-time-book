@@ -6,20 +6,14 @@ import { BookService } from './books.service';
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css'],
-  providers: [BookService]
+  styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  selectedBook: Book;
-  constructor(private bookService: BookService) { }
+
+  constructor() { }
 
   ngOnInit() {
-    this.bookService.bookSelected
-      .subscribe(
-        (book: Book) => {
-          this.selectedBook = book;
-        }
-      );  	
+
   }
 
 }

@@ -27,6 +27,16 @@ export class BookDetailComponent implements OnInit {
   		});
   }
 
+  onEditBook(){
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
+
+  onDeleteBook(){
+    this.bookService.deleteBook(this.id);
+    this.router.navigate(['/books']);    
+  }
+
+
 
 
 }

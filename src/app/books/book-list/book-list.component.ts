@@ -20,7 +20,17 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.books = this.bookService.getBooks();
+    this.bookService.bookChanged
+    .subscribe(
+      (books: Book[]) => {
+        this.books = books;
+      }
+      );
+  	this.books = this.bookService.getBooks();    
+  }
+
+  onNewBook(){
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
 }

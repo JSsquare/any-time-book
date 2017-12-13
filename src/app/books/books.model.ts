@@ -2,12 +2,12 @@ export class Book {
 	public title: string;
 	public author: string;
 	public imagePath: string;
-	public ISBN: any;
+	public isbn: string;
 
-	constructor(title: string, author: string, imagePath: string, ISBN: any) {
+	constructor(title: string, author: string, imagePath: string, isbn: string) {
 		this.title = title;
 		this.author = author;
 		this.imagePath = imagePath;
-		this.ISBN = ISBN;
+		this.isbn = isbn;
 	}
 }

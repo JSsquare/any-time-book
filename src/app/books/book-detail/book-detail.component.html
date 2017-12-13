@@ -1,26 +1,6 @@
+<div class="container" style="padding:10%">
 
-<div class="row">
-	<div class="col-xs-12">
-	  <h1>{{ book.title }}</h1>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-	  <p>{{book.ISBN}}</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-	  <p>{{book.author}}</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-		<img [src]="book.imagePath" alt="" class="img-responsive"
-		style="max-height: 300px;">
-	</div>
-</div>
-<div class="row">
+<div class="row" style="padding:0px 0px 3% 0px">
 	<div class="col-xs-12">
 	  <div class="btn-group"
 	  appDropdown>
@@ -29,9 +9,36 @@
 	  		<span class="caret"></span>
 	  	</button>
 	  	<ul class="dropdown-menu">
-	  		<li><a style="cursor: pointer;">Edit Book</a></li>
-	  		<li><a style="cursor: pointer;">Delete Book</a></li>	  		
+	  		<li><a style="cursor: pointer;" (click)="onEditBook()">Edit Book</a></li>
+	  		<li><a style="cursor: pointer;" (click)="onDeleteBook()">Delete Book</a></li>	  		
 	  	</ul>
 	  </div>
 	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<img [src]="book.imagePath" alt="" class="img-responsive"
+		style="max-height: 250px;">
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+	  <h1>{{ book.title }}</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+	  <p>{{ book.isbn }}</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+	  <p>{{book.author}}</p>
+	</div>
+</div>
+
 </div>
