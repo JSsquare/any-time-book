@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BookStartComponent } from './books/book-start/book-start.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookService } from './books/books.service';
+import { DataStorageService } from './shared/data-storage.service'
 
 @NgModule({
   declarations: [
@@ -30,9 +32,10 @@ import { BookService } from './books/books.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [BookService],
+  providers: [BookService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

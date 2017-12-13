@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
 
 import { Book } from './books.model';
 
@@ -7,15 +8,15 @@ import { Book } from './books.model';
 
 @Injectable()
 export class BookService {
-
   bookChanged = new Subject<Book[]>();
 
+  private books: Book[] = [];
 
 
-  private books: Book[] = [
-  	new Book('Test Book', 'Testing', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/business_bookcover.png', 'ISBN-SAMPLE'),
-  	new Book('Test Book 2', 'Testing 2', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/business_bookcover.png', 'ISBN-SAMPLE 2')
-  ];
+  setBook(books: Book[]){
+    this.books = books;
+    this.bookChanged.next(this.books.slice());
+  }
 
   getBooks(){
   	return this.books.slice();

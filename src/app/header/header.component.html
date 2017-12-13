@@ -7,6 +7,15 @@
 			<ul class="nav navbar-nav">
 				<li><a routerLink="/books" href="">Book List</a></li>
 			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a (click)="onSaveData()" class="btn btn-success">Save</a>
+				</li>
+				<li>
+					<a (click)="fetchData()" class="btn btn-info">Fetch</a>
+				</li>
+			</ul>
 		</div>
+
 	</div>
 </nav>
