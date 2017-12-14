@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as firebase from 'firebase';
 import { Book } from '../books.model';
 import { BookService } from '../books.service';
+import { AuthService } from '../../auth/auth.service';
 
+import { Injectable } from '@angular/core';
+
+@Injectable()
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -15,7 +20,8 @@ export class BookListComponent implements OnInit {
 
   constructor(private bookService: BookService,
               private router: Router,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private authService: AuthService) { 
 
   }
 
@@ -31,6 +37,16 @@ export class BookListComponent implements OnInit {
 
   onNewBook(){
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  isAdminCheck(){
+    if(this.authService.isAuthenticated()){
+      return this.authService.isAdmin();  
+    }
+    else{
+      return false;
+    }
+    
   }
 
 }
