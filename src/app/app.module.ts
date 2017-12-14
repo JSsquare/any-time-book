@@ -14,7 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { BookStartComponent } from './books/book-start/book-start.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookService } from './books/books.service';
-import { DataStorageService } from './shared/data-storage.service'
+import { DataStorageService } from './shared/data-storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { DataStorageService } from './shared/data-storage.service'
     BookProductComponent,
     DropdownDirective,
     BookStartComponent,
-    BookEditComponent
+    BookEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,7 @@ import { DataStorageService } from './shared/data-storage.service'
     HttpModule,
     AppRoutingModule
   ],
-  providers: [BookService, DataStorageService],
+  providers: [BookService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

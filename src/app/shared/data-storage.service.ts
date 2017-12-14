@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import {  AuthService } from '../auth/auth.service';
 
 import { BookService } from '../books/books.service';
 import { Book } from '../books/books.model';
@@ -9,16 +10,20 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataStorageService {
-	constructor(private http: Http, private bookService: BookService){
+	constructor(private http: Http, private bookService: BookService,
+				private authService: AuthService){
 
 	}
 
 	storeBooks(){
-		return this.http.put('https://ng-any-time-book.firebaseio.com/books.json', this.bookService.getBooks());
+		const token = this.authService.getToken();		
+		return this.http.put('https://ng-any-time-book.firebaseio.com/books.json?auth=' + token, this.bookService.getBooks());
 	}
 
 	getBooks(){
-		this.http.get('https://ng-any-time-book.firebaseio.com/books.json')
+		const token = this.authService.getToken();
+	
+		this.http.get('https://ng-any-time-book.firebaseio.com/books.json?auth=' + token)
 		.map(
 			(response: Response) => {
 				const books: Book[] = response.json();
