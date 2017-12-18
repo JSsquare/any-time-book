@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Book } from '../books.model';
 import { BookService } from '../books.service';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class BookDetailComponent implements OnInit {
   id: number;
   constructor(private bookService: BookService,
   	private route: ActivatedRoute,
-    private router: Router) { 
+    private router: Router,
+    private authService: AuthService) { 
   }
 
   ngOnInit() {
@@ -36,6 +38,15 @@ export class BookDetailComponent implements OnInit {
     this.router.navigate(['/books']);    
   }
 
+
+  isAdminCheck(){
+    if(this.authService.isAuthenticated()){
+      return this.authService.isAdmin();  
+    }
+    else{
+      return false;
+    }    
+  }
 
 
 
