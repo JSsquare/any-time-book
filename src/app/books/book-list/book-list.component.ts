@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { Book } from '../books.model';
 import { BookService } from '../books.service';
 import { AuthService } from '../../auth/auth.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 import { Injectable } from '@angular/core';
 
@@ -21,7 +22,8 @@ export class BookListComponent implements OnInit {
   constructor(private bookService: BookService,
               private router: Router,
               private route: ActivatedRoute,
-              private authService: AuthService) { 
+              private authService: AuthService,
+              private dataStorageService: DataStorageService) { 
 
   }
 
@@ -32,7 +34,8 @@ export class BookListComponent implements OnInit {
         this.books = books;
       }
       );
-  	this.books = this.bookService.getBooks();    
+  	//this.books = this.bookService.getBooks();
+    this.books = this.dataStorageService.getBooks();
   }
 
   onNewBook(){

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a routerLink="/books" class="navbar-brand"> Any Time Book</a>
+			<a routerLink="/signin" class="navbar-brand" *ngIf="!authService.isAuthenticated()"> Any Time Book</a>
+			<a routerLink="/books" class="navbar-brand" *ngIf="authService.isAuthenticated()"> Any Time Book</a>			
 		</div>
 		<div class="collapse navbar-collapse">
 
@@ -9,14 +10,12 @@
 				<li class="dropdown">
 					<a (click)="onSaveData()" class="btn btn-success" *ngIf="authService.isAdmin()">Save</a>
 				</li>
-				<li>
-					<a (click)="fetchData()" class="btn btn-info">Fetch</a>
-				</li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<ng-template [ngIf]="!authService.isAuthenticated()">
 				<li><a routerLink="/signin">Sign In</a></li>					
+				<li><a routerLink="/signup">Sign Up</a></li>									
 				</ng-template>
 				<li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="authService.isAuthenticated()">Logout</a></li>
 			</ul>
