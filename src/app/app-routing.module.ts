@@ -17,7 +17,7 @@ const appRoutes: Routes = [
    { path: 'new', component: BookEditComponent, canActivate: [AuthGuard] }, 
    { path: ':id', component: BookDetailComponent },
    { path: ':id/edit', component: BookEditComponent, canActivate: [AuthGuard] }   
-  ] },
+  ], canActivate: [AuthGuard] },
   {path: 'signup', component: SignupComponent },
   {path: 'signin', component: SigninComponent }
   ];

@@ -35,7 +35,12 @@ export class BookListComponent implements OnInit {
       }
       );
   	//this.books = this.bookService.getBooks();
-    this.books = this.dataStorageService.getBooks();
+    if(this.authService.isAuthenticated()){
+      this.books = this.dataStorageService.getBooks() || this.bookService.getBooks();
+    }
+    else{
+      this.books = this.bookService.getBooks();
+    }
   }
 
   onNewBook(){
