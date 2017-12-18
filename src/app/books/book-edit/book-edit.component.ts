@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookService } from '../books.service';
+import { DataStorageService } from '../../shared/data-storage.service';
+import { Response } from '@angular/http';
 
 import { Book } from '../books.model';
 
@@ -18,7 +20,8 @@ export class BookEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private bookService: BookService,
-    private router: Router) { }
+    private router: Router,
+    private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
   	this.route.params
@@ -37,6 +40,15 @@ export class BookEditComponent implements OnInit {
     } else {
       this.bookService.addBook(this.bookForm.value);
     }
+
+    this.dataStorageService.storeBooks()
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );    
+
+
     this.onCancel();    
   }
 
