@@ -22,11 +22,11 @@ export class DataStorageService {
 
 	getBooks(){
 		const token = this.authService.getToken();
-	
-		this.http.get('https://ng-any-time-book.firebaseio.com/books.json?auth=' + token)
+		const booksUrl = this.authService.isAdmin() ? 'https://ng-any-time-book.firebaseio.com/books.json?auth=' + token : 'https://ng-any-time-book.firebaseio.com/books.json?auth=' + token + '&orderBy="action"&equalTo="available"';
+		this.http.get(booksUrl)
 		.map(
 			(response: Response) => {
-				const books: Book[] = response.json();
+				const books: Book[] = Object.values(response.json());
 				console.log(books);
 				return books;
 			}

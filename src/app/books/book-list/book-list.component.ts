@@ -33,8 +33,7 @@ export class BookListComponent implements OnInit {
       (books: Book[]) => {
         this.books = books;
       }
-      );
-  	//this.books = this.bookService.getBooks();
+      );  	
     if(this.authService.isAuthenticated()){
       this.books = this.dataStorageService.getBooks() || this.bookService.getBooks();
     }
