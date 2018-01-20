@@ -16,13 +16,9 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-xs-12">
-		<img [src]="book.imagePath" alt="" class="img-responsive"
-		style="max-height: 250px;">
-	</div>
+<div class="row" style="padding:0px 0px 5% 0px" *ngIf="!isAdminCheck()">
+	<a style="cursor: pointer;" class="btn btn-primary" (click)="onEditBook()">Hold This Book</a>
 </div>
-
 
 
 <div class="row">
@@ -30,6 +26,13 @@
 	  <h1>{{ book.title }}</h1>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-xs-12">
+	  <p>{{book.action}}</p>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-xs-12">
 	  <p>{{ book.isbn }}</p>
@@ -41,9 +44,10 @@
 	</div>
 </div>
 
+
 <div class="row">
 	<div class="col-xs-12">
-	  <p>{{book.action}}</p>
+		<img [src]="book.imagePath" alt="" class="img-responsive"
+		style="max-height: 250px;">
 	</div>
-</div>
 </div>

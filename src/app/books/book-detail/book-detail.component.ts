@@ -4,6 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Book } from '../books.model';
 import { BookService } from '../books.service';
 import { AuthService } from '../../auth/auth.service';
+import { DataStorageService } from '../../shared/data-storage.service';
+import { Response } from '@angular/http';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class BookDetailComponent implements OnInit {
   constructor(private bookService: BookService,
   	private route: ActivatedRoute,
     private router: Router,
+    private dataStorageService: DataStorageService,    
     private authService: AuthService) { 
   }
 
@@ -26,7 +29,7 @@ export class BookDetailComponent implements OnInit {
   		(params: Params) => {
   			this.id = +params['id'];
   			this.book = this.bookService.getBook(this.id);
-  		});
+  		});    
   }
 
   onEditBook(){
@@ -35,7 +38,13 @@ export class BookDetailComponent implements OnInit {
 
   onDeleteBook(){
     this.bookService.deleteBook(this.id);
-    this.router.navigate(['/books']);    
+    this.router.navigate(['/books']);
+    this.dataStorageService.storeBooks()
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );      
   }
 
 

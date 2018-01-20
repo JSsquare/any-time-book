@@ -37,6 +37,8 @@ export class BookService {
     this.bookChanged.next(this.books.slice());    
   }
 
+
+
   deleteBook(index: number){
     this.books.splice(index, 1);
     this.bookChanged.next(this.books.slice());

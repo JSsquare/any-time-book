@@ -18,7 +18,7 @@ export class DataStorageService {
 	storeBooks(){
 		const token = this.authService.getToken();		
 		return this.http.put('https://ng-any-time-book.firebaseio.com/books.json?auth=' + token, this.bookService.getBooks());
-	}
+	}	
 
 	getBooks(){
 		const token = this.authService.getToken();
@@ -36,5 +36,22 @@ export class DataStorageService {
 				this.bookService.setBook(books);
 			}
 			);
+	}
+
+	getAllBooks(){
+		const token = this.authService.getToken();
+		this.http.get('https://ng-any-time-book.firebaseio.com/books.json?auth=' + token)
+		.map(
+			(response: Response) => {
+				const books: Book[] = Object.values(response.json());
+				console.log(books);
+				return books;
+			}
+		)
+		.subscribe(
+			(books: Book[]) => {
+				this.bookService.setBook(books);
+			}
+			);		
 	}
 }

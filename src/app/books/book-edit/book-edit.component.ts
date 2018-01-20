@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookService } from '../books.service';
 import { DataStorageService } from '../../shared/data-storage.service';
 import { Response } from '@angular/http';
+import { AuthService } from '../../auth/auth.service';
 
 import { Book } from '../books.model';
 
@@ -16,12 +17,13 @@ export class BookEditComponent implements OnInit {
   id: number;
   editMode =  false;
   bookForm: FormGroup;
-
+  actionText: string;
 
   constructor(private route: ActivatedRoute,
     private bookService: BookService,
     private router: Router,
-    private dataStorageService: DataStorageService) { }
+    private dataStorageService: DataStorageService,
+    private authService: AuthService) { }
 
   ngOnInit() {
   	this.route.params
@@ -35,27 +37,37 @@ export class BookEditComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.bookForm.value);
+    console.log(this.bookForm.value, this.editMode);
     if(this.editMode){
       this.bookService.updateBook(this.id, this.bookForm.value);
     } else {
       this.bookService.addBook(this.bookForm.value);
     }
 
-    this.dataStorageService.storeBooks()
-    .subscribe(
-      (response: Response) => {
-        console.log(response);
-      }
-    );    
-
-
+    if(this.authService.isAdmin()){
+        this.dataStorageService.storeBooks()
+        .subscribe(
+          (response: Response) => {
+            console.log(response);
+          }
+        );
+    }
+    
     this.onCancel();    
   }
 
   onCancel(){
     this.router.navigate(['../'], {relativeTo: this.route})
   }
+
+  isAdminCheck(){
+    if(this.authService.isAuthenticated()){
+      return this.authService.isAdmin();  
+    }
+    else{
+      return false;
+    }
+  }   
 
   private initForm() {
     let bookTitle = '';
