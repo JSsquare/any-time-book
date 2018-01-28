@@ -7,7 +7,7 @@ import { Book } from '../../books.model';
   styleUrls: ['./book-product.component.css']
 })
 export class BookProductComponent implements OnInit {
-  @Input() book: Book
+  @Input() book: Book;
   @Input() index: number;  
   
 

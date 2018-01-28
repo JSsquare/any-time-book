@@ -33,7 +33,7 @@ export class BookEditComponent implements OnInit {
   			this.editMode =  params['id'] != null;
         this.initForm();
   		}
-  		)
+  		);
   }
 
   onSubmit(){
@@ -57,7 +57,7 @@ export class BookEditComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   isAdminCheck(){
